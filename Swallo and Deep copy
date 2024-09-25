@@ -1,0 +1,47 @@
+// By default constructor do swallo copy it's mean they refer to same memory location
+
+
+#include <iostream>
+#include <bits/stdc++.h>
+using namespace std;
+class Hero{
+    int health;
+    char level;
+    public:
+    char* name;
+    Hero(int health,char level){
+        this->health=health;
+        this->level=level;
+        name=new char[100];
+    }
+    // Hero(Hero &temp){
+    //     this->health=temp.health;
+    //     this->level=temp.level;
+    // }
+    int gethealth(){
+        return this->health;
+    }
+    char getlevel(){
+        return this->level;
+    }
+    void print(){
+        cout<<"Name: "<<name<<endl;
+        cout<<"Health :"<<health<<endl;
+        cout<<"Level  :"<<level<<endl;
+    }
+    void getname(char* s){
+        strcpy(name,s);
+    }
+
+};
+int main() {
+   Hero h(10,'A');
+char name[10]="Amarendra";
+h.getname(name);
+   h.print();
+   Hero R(h);
+   R.print();
+   h.name[0]='P';
+   h.print();
+   R.print();
+}
