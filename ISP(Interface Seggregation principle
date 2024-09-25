@@ -1,0 +1,84 @@
+#include <iostream>
+using namespace std;
+// example of ISP (interface segergation principle wrong and good one)     ///// not good idea
+class IofficeDevice{
+    public:
+           virtual void printdocument()=0;
+           virtual void scandocument()=0;
+           virtual void faxdocument()=0;
+};
+class SimplePrinter:public IofficeDevice{
+    public:
+            void printdocument() override{
+                cout<<"Printing document"<<endl;
+            }
+            void scandocument() override{
+                cout<<"Not able to do"<<endl;  // no use still need to implememt
+            }
+            void faxdocument() override{
+                cout<<"Not able to do"<<endl; // no use still need to implement
+            }
+};
+class multiFunctionPrinter:public IofficeDevice{
+    public:
+          void printdocument() override{
+              cout<<"printing document"<<endl;
+          }
+          void scandocument() override{
+              cout<<"Scanning document"<<endl;
+          }
+          void faxdocument() override{
+              cout<<"Fax docuemt"<<endl;
+          }
+};
+int main() {
+    IofficeDevice* D;
+    D=new multiFunctionPrinter();
+    D->scandocument();
+}
+
+
+
+*************************************************************************************************How to Handle it***************************************************************************************************
+
+#include <iostream>
+using namespace std;
+// correct example of ISP
+class Iprinter{
+     public:
+            virtual void printdocument()=0;
+};
+class Iscanner{
+    public:
+           virtual void scandocument()=0;
+};
+class Ifax{
+       public:
+              virtual void faxdocument()=0;
+};
+class Simpleprinter:public Iprinter{
+    public:
+           void printdocument() override{
+               cout<<"Printing Dcoument"<<endl;
+           }
+};
+class MultiFunctionPrinter:public Iprinter,public Iscanner,public Ifax{
+      public:
+             void printdocument() override{
+                 cout<<"Printing document"<<endl;
+             }
+             void scandocument() override{
+                 cout<<"Scan all document"<<endl;
+             }
+             void faxdocument() override{
+                 cout<<"Fax docuement"<<endl;
+             }
+};
+int main() {
+    Simpleprinter s;
+    s.printdocument();
+    MultiFunctionPrinter p;
+    p.faxdocument();
+}
+
+
