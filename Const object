@@ -1,0 +1,23 @@
+#include <iostream>
+using namespace std;
+class BankAccount{
+       const int accountno;
+       double balance;
+       public:
+             BankAccount(int acc,double bal)
+             : accountno(acc),balance(bal){}
+             int getaccount() const{
+                return accountno;
+             }
+             double getbalance() const{  // const member function ensure it will not modify and data member of object
+                return balance;
+             }
+             void deposit(double amount){
+                balance+=amount;
+             }
+};
+int main(){
+const BankAccount Ravi(1234567,20000.0);  // const object call only const function
+                                         // it's prevent modification in objects
+cout<<"Total balance "<<Ravi.getbalance()<<endl;
+}
